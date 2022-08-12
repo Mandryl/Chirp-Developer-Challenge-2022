@@ -1,0 +1,17 @@
+{
+  "name": "chirp-developer-challenge-2022",
+  "version": "1.0.0",
+  "engines": {
+    "node": "16.x"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mandryl/Chirp-Developer-Challenge-2022.git"
+  },
+  "homepage": "https://github.com/Mandryl/Chirp-Developer-Challenge-2022#readme"
+}
