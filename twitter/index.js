@@ -14,7 +14,7 @@ const client = auth.init_twitter_api_v2();
 const streaming = {};
 
 
-streaming.startStream = async () => {
+streaming.startStream = async (callback) => {
   // // Get and delete old rules if needed
   const rules = await client.v2.streamRules();
   if (rules.data?.length) {
@@ -34,11 +34,11 @@ streaming.startStream = async () => {
       expansions: ["referenced_tweets.id", "author_id"],
     })
     .then((res) => {
-      console.log("Standby mode...\n");
+      logger.info("Standby mode...\n");
       return res;
     })
     .catch((err) => {
-      console.log(err);
+      logger.error(err);
       throw err;
     });
 
@@ -51,16 +51,16 @@ streaming.startStream = async () => {
         (tweet) => tweet.type === "retweeted"
       ) ?? false;
     if (isARt) {
-      console.log("Event: Detect untargeted tweets (Retweet).\nResponse: None\n");
+      logger.info("Event: Detect untargeted tweets (Retweet).\nResponse: None\n");
       return;
     } else if (tweet.data.author_id === BOT_ID) {
-      console.log("Event: Detect untargeted tweets (BOT tweet).\nResponse: None\n");
+      logger.info("Event: Detect untargeted tweets (BOT tweet).\nResponse: None\n");
       return;
     } else if (typeof tweet.includes.tweets === "undefined") {
-      console.log("Event: Detect untargeted tweets (Not reply).\nResponse: None\n");
+      logger.info("Event: Detect untargeted tweets (Not reply).\nResponse: None\n");
       return;
     } else if (tweet.includes.tweets[0].author_id === BOT_ID) {
-      console.log("Event: Detect untargeted tweets (Reply to Bot).\nResponse: None\n");
+      logger.info("Event: Detect untargeted tweets (Reply to Bot).\nResponse: None\n");
       return;
     } else {
       // Input
@@ -73,8 +73,8 @@ streaming.startStream = async () => {
         target_text: tweet.includes.tweets[0].text,
       };
       // Action when mentioned
-      console.log(`Event: Tweet ${input.request_text} from @${input.username}`);
-      await deepl.deepl_translation(input).then((res) => {
+      logger.info(`Event: Tweet ${input.request_text} from @${input.username}`);
+      await callback(input).then((res) => {
         return reply.reply_result(input, res);
       });
     }
