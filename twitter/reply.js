@@ -16,7 +16,7 @@ exports.reply_result = async (input, result_text) => {
       };
     });
     // Reply
-    await client.post("statuses/update", params);
+    client.post("statuses/update", params);
     logger.debug(`Response: ${params.status}\n`);
     return;
   } catch (error) {
@@ -26,7 +26,7 @@ exports.reply_result = async (input, result_text) => {
 };
 
 // Preprocess text
-exports.preprocess_word = async (text) => {
+exports.preprocess_word = (text) => {
   // Exclude menthion
   const regex_mention = /@+([a-zA-Z0-9亜-熙ぁ-んァ-ヶー-龥朗-鶴.\-_]+)/g;
   // Exclude attached things
