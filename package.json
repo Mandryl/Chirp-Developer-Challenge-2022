@@ -13,5 +13,16 @@
     "type": "git",
     "url": "git+https://github.com/Mandryl/Chirp-Developer-Challenge-2022.git"
   },
-  "homepage": "https://github.com/Mandryl/Chirp-Developer-Challenge-2022#readme"
+  "homepage": "https://github.com/Mandryl/Chirp-Developer-Challenge-2022#readme",
+  "dependencies": {
+    "@azure/cognitiveservices-newssearch": "^3.0.1",
+    "@azure/ms-rest-azure-js": "^2.1.0",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "emoji-regex": "^10.1.0",
+    "he": "^1.2.0",
+    "log4js": "^6.6.1",
+    "twitter": "^1.7.1",
+    "twitter-api-v2": "^1.12.3"
+  }
 }
