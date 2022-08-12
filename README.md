@@ -1,1 +1,1 @@
-# Chirp-Developer-Challenge-2022
+# Chirp Developer Challenge 2022
