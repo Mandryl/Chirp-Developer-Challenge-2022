@@ -30,6 +30,7 @@ books.search = async (keywords) => {
         snippet = snippet.replace(/<\/?[^>]+(>|$)/g, "");
 
         return {
+            type: "book",
             title: v.volumeInfo.title,
             author: v.volumeInfo.authors ?? "",
             link: v.volumeInfo.infoLink ?? "",

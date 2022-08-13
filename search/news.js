@@ -25,6 +25,7 @@ news.search = async (keywords) => {
     const newsResult = bingResult ? bingResult.value : [];
     const result = newsResult.map(v => {
         return {
+            type: "news",
             title: v.name,
             link: v.url,
             provider: v.provider[0].name,
