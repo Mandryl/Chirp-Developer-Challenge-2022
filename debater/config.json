@@ -1,0 +1,13 @@
+{
+    "threshold": 0.8,
+    "positiveBias": 0.01,
+    "message": {
+        "request": {
+            "positive":"Can you find a positive opinion on this?",
+            "negative":"Can you find a negative opinion on this?"
+        },
+        "response":{
+            "failed": "Couldn't find: The topic may not have a general consensus or may be the latest under discussion."
+        }
+    }
+}
