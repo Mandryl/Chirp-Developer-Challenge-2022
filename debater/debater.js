@@ -4,7 +4,7 @@ const headers = {
     'apiKey': process.env.DEBATER_API_KEY
 };
 
-const logger = require("./logger.js");
+const logger = require("../common/logger.js");
 
 const debater = {};
 debater.claimBoundaries = async (sentence) => {

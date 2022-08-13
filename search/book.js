@@ -32,7 +32,7 @@ books.search = async (keywords) => {
         return {
             type: "book",
             title: v.volumeInfo.title,
-            author: v.volumeInfo.authors ?? "",
+            author: v.volumeInfo.authors ?? [],
             link: v.volumeInfo.infoLink ?? "",
             snippet: snippet
         }

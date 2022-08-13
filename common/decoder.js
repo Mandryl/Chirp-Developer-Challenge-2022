@@ -17,7 +17,7 @@ decoder.decodeUnicode = () => {
     return decoder;
 };
 
-deocoder.deCodeSymbol = () => {
+decoder.deCodeSymbol = () => {
     target = he.decode(target);
 
     return decoder;
