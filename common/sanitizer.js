@@ -3,46 +3,37 @@ const logger = require("./logger.js");
 
 const sanitizer = {};
 
-let target = "";
-
-sanitizer.removeEmoji = () =>{
+sanitizer.removeEmoji = (text) =>{
     const emojiRegex = emojiRegexCreator();
-    target = target.replace(emojiRegex,"");
-
-    return sanitizer;
+    return text.replace(emojiRegex,"");
 };
 
-sanitizer.removeMention = () =>{
+sanitizer.removeMention = (text) =>{
     const regex_mention = /@+([a-zA-Z0-9亜-熙ぁ-んァ-ヶー-龥朗-鶴.\-_]+)/g;
-    target = target.replace(regex_mention,"");
-
-    return sanitizer;
+    return text.replace(regex_mention,"");
 };
 
-sanitizer.removeHashtag = () =>{
-    target = target.replace(/#/g,"");
-
-    return sanitizer;
+sanitizer.removeHashtag = (text) =>{
+    return text.replace(/#/g,"");
 };
 
-sanitizer.removeLines = () =>{
-    target = target.replace(/(\r\n|\n|\r)/gm,"");
-
-    return sanitizer;
+sanitizer.removeLines = (text) =>{
+    return text.replace(/(\r\n|\n|\r)/gm,"");
 };
 
-sanitizer.removeFiles = () =>{
+sanitizer.removeFiles = (text) =>{
     const regex_url = /(?:https?\:\/\/|www\.)[^\s]+/g;
-    target = target.replace(regex_url,"");
-
-    return sanitizer;
+    return text.replace(regex_url,"");
 };
 
 sanitizer.removeAll = (text) =>{
-    target = text;
-    sanitizer.removeEmoji().removeMention().removeHashtag().removeLines().removeFiles();
-    const sanitized = target;
-    target = "";
+    let sanitized = text;
+    sanitized = sanitizer.removeEmoji(sanitized);
+    sanitized = sanitizer.removeMention(sanitized);
+    sanitized = sanitizer.removeHashtag(sanitized);
+    sanitized = sanitizer.removeLines(sanitized);
+    sanitized = sanitizer.removeFiles(sanitized); 
+
     logger.debug(`(Sanitize Log): Target=${text} , Sanitized=${sanitized}`);
     return sanitized;
 };

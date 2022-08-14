@@ -3,31 +3,27 @@ const logger = require("./logger.js");
 
 const decoder = {};
 
-let target = "";
-
-decoder.decodeUnicode = () => {
-    const raw = target;
+decoder.decodeUnicode = (text) => {
+    let decoded;
     try {
-        target = decodeURIComponent(JSON.parse(`"${raw}"`));
+        decoded = decodeURIComponent(JSON.parse(`"${text}"`));
     } catch (e) {
-        target = raw;
-        logger.error(`(Decode Error): raw=${raw}`);
+        decoded = text;
+        logger.error(`(Decode Error): text=${text}`);
     }
 
-    return decoder;
+    return decoded;
 };
 
-decoder.deCodeSymbol = () => {
-    target = he.decode(target);
-
-    return decoder;
+decoder.deCodeSymbol = (text) => {
+    return he.decode(text);
 }
 
 decoder.decodeAll = (text) => {
-    target = text;
-    decoder.decodeUnicode().deCodeSymbol();
-    const decoded = target;
-    target = "";
+    let decoded = text;
+    decoded = decoder.decodeUnicode(decoded);
+    decoded = decoder.deCodeSymbol(decoded);
+
     logger.debug(`(Decode Log): Target=${text} , Sanitized=${decoded}`);
     return decoded;
 };
