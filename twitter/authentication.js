@@ -16,14 +16,6 @@ exports.init_twitter_api_v2 =()=> {
   return new TwitterApi(process.env.BEARER_TOKEN);
 }
 
-// DeepL API V2 Info
-exports.get_deepl_env =()=> {
-  return {
-    api_key: process.env.API_KEY,
-    api_url: process.env.API_URL,
-  };
-}
-
 // Twitter User info
 exports.get_twitter_info =()=> {
   return {

@@ -6,28 +6,16 @@ const logger = require("../common/logger.js");
 exports.reply_result = async (input, result_text) => {
   try {
     const client = auth.init_twitter_api();
-    // Create reply text
-    const res = this.preprocess_word(result_text);
     const params = {
-      status: `@${input.username} ${res}`,
+      status: `@${input.username} ${result_text}`,
       in_reply_to_status_id: input.id,
     };
 
     // Reply
     client.post("statuses/update", params);
-    logger.debug(`Response: ${params.status}\n`);
-    return;
+    logger.info(`Response: ${params.status}\n`);
   } catch (error) {
     logger.error(error);
     throw err;
   }
-};
-
-// Preprocess text
-exports.preprocess_word = (text) => {
-  // Exclude menthion
-  const regex_mention = /@+([a-zA-Z0-9亜-熙ぁ-んァ-ヶー-龥朗-鶴.\-_]+)/g;
-  // Exclude attached things
-  const regex_url = /(?:https?\:\/\/|www\.)[^\s]+/g;
-  return text.replace(regex_mention, "").replace(regex_url.source, "");
 };

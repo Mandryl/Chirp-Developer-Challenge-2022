@@ -60,7 +60,7 @@ const getMessage = (determined) => {
     const FAIL_MSG = config.message.response.failed;
 
     if (stance === "Neutral") return FAIL_MSG;
-    logger.info(`Found type:${lit.type} score:${lit.score} stm:${lit.snippet ?? lit.description}`);
+    logger.info(`Found type:${lit.type} link:${lit.link}`);
     const statement = (lit.type === "book") ? lit.snippet : lit.description;
     // space after mention+"Found"+link+line
     return `Found:${lit.link}\n${shorten(statement, 280, 1 + "Founnd:".length + 23 + 1)}`;
