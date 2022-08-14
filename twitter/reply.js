@@ -13,7 +13,7 @@ exports.reply_result = async (input, result_text) => {
 
     // Reply
     client.post("statuses/update", params);
-    logger.info(`Response: ${params.status}\n`);
+    logger.info(`Response: ${params.status}`);
   } catch (error) {
     logger.error(error);
     throw err;

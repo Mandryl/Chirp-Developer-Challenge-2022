@@ -24,10 +24,10 @@ const isIgnoreEvent = (tweet) => {
     tweet.includes.tweets[0]?.author_id === BOT_ID
   );
 
-  if (isARt) logger.info("Event: Detect untargeted tweets (Retweet).\nResponse: None\n");
-  if (isBotTweet) logger.info("Event: Detect untargeted tweets (BOT tweet).\nResponse: None\n");
-  if (isNotReply) logger.info("Event: Detect untargeted tweets (Not reply).\nResponse: None\n");
-  if (isReplyToBot) logger.info("Event: Detect untargeted tweets (Reply to Bot).\nResponse: None\n");
+  if (isARt) logger.info("Event: Detect untargeted tweets (Retweet). Response: None");
+  if (isBotTweet) logger.info("Event: Detect untargeted tweets (BOT tweet). Response: None");
+  if (isNotReply) logger.info("Event: Detect untargeted tweets (Not reply). Response: None");
+  if (isReplyToBot) logger.info("Event: Detect untargeted tweets (Reply to Bot). Response: None");
 
   return isARt || isBotTweet || isNotReply || isReplyToBot;
 };
@@ -54,7 +54,7 @@ streaming.startStream = async (callback) => {
     logger.error(err);
     throw err;
   });
-  logger.info("Standby mode...\n");
+  logger.info("Standby mode...");
 
   // Enable auto reconnect
   stream.autoReconnect = true;
