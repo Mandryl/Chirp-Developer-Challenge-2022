@@ -24,14 +24,12 @@ const getStrongScores = (result, mode) => {
 };
 
 const determineStance = (result, mode) => {
-    const TH = config.threshold;
-    const bookHasStrong = result.book.some(v => Math.abs(v.score) >= TH);
-    const newsHasStrong = result.news.some(v => Math.abs(v.score) >= TH);
-
-    if (!bookHasStrong && !newsHasStrong)
-        return { stance: "Neutral", lit: null };
-
     const strongScores = getStrongScores(result, mode);
+    const TH = config.threshold;
+    const hasStrong = strongScores.some(v => Math.abs(v.score) >= TH);
+
+    if (!hasStrong) return { stance: "Neutral", lit: null };
+
     const BIAS = config.positiveBias;
     const strongest = strongScores.reduce((a, b) => {
         const scoreA = a.score > 0 ? a.score - BIAS : Math.abs(a.score);
@@ -54,12 +52,17 @@ const shorten = (str, allLength, usedLength) => {
     return shortened + last;
 };
 
-const getMessage = (determined) => {
+const getMessage = (determined, mode) => {
     const stance = determined.stance;
     const lit = determined.lit;
-    const FAIL_MSG = config.message.response.failed;
 
-    if (stance === "Neutral") return FAIL_MSG;
+    if (stance === "Neutral") {
+        const FAIL_MSG = config.message.response.failed;
+        const STANCE_FAIL_MSG = config.message.response.failed_stance_specified;
+        const neutralMsg = FAIL_MSG + (mode === "ALL") ? "" : STANCE_FAIL_MSG;
+        return neutralMsg;
+    }
+
     logger.info(`Found type:${lit.type} link:${lit.link}`);
     const statement = (lit.type === "book") ? lit.snippet : lit.description;
     // space after mention+"Found"+link+line
@@ -71,8 +74,8 @@ logic.response = async (input) => {
     const request = input.request_text;
 
     // detect claim
-    const sanitized = sanitizer.removeAll(target);
-    const claim = await debater.claimBoundaries(sanitized);
+    const sanitizedTarget = sanitizer.removeAll(target);
+    const claim = await debater.claimBoundaries(sanitizedTarget);
 
     // keyword extraction and search
     const keywords = await debater.termWikifier(claim);
@@ -90,16 +93,17 @@ logic.response = async (input) => {
         v.score = proConScore[1][index];
     });
 
+    const sanitizedRequest = sanitizer.removeAll(request);
     let mode = "ALL";
     const POS_ONLY = config.message.request.positive;
     const NEG_ONLY = config.message.request.negative;
-    if (request === POS_ONLY) mode = "POS ONLY";
-    else if (request === NEG_ONLY) mode = "NEG ONLY";
+    if (sanitizedRequest === POS_ONLY) mode = "POS ONLY";
+    else if (sanitizedRequest === NEG_ONLY) mode = "NEG ONLY";
 
     // determine stance from search result
     const determined = determineStance(searchResult, mode);
     // form response message
-    const message = getMessage(determined);
+    const message = getMessage(determined, mode);
     return message;
 };
 
