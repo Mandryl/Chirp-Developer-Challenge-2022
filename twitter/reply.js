@@ -7,14 +7,12 @@ exports.reply_result = async (input, result_text) => {
   try {
     const client = auth.init_twitter_api();
     // Create reply text
-    const params = await this.preprocess_word(result_text).then((res) => {
-      const tmp = `@${input.username} ${res}`;
-      const tweet_text = tmp.slice(0, 280);
-      return {
-        status: tweet_text,
-        in_reply_to_status_id: input.id,
-      };
-    });
+    const res = this.preprocess_word(result_text);
+    const params = {
+      status: `@${input.username} ${res}`.slice(0, 280),
+      in_reply_to_status_id: input.id,
+    };
+
     // Reply
     client.post("statuses/update", params);
     logger.debug(`Response: ${params.status}\n`);
