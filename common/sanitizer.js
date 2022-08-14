@@ -7,42 +7,42 @@ let target = "";
 
 sanitizer.removeEmoji = () =>{
     const emojiRegex = emojiRegexCreator();
-    target = sanitizer.text.replace(emojiRegex,"");
+    target = sanitizer.target.replace(emojiRegex,"");
 
     return sanitizer;
 };
 
 sanitizer.removeMention = () =>{
     const regex_mention = /@+([a-zA-Z0-9亜-熙ぁ-んァ-ヶー-龥朗-鶴.\-_]+)/g;
-    target = sanitizer.text.replace(regex_mention,"");
+    target = sanitizer.target.replace(regex_mention,"");
 
     return sanitizer;
 };
 
 sanitizer.removeHashtag = () =>{
-    target = sanitizer.text.replace(/#/g,"");
+    target = sanitizer.target.replace(/#/g,"");
 
     return sanitizer;
 };
 
 sanitizer.removeLines = () =>{
-    target = sanitizer.text.replace(/(\r\n|\n|\r)/gm,"");
+    target = sanitizer.target.replace(/(\r\n|\n|\r)/gm,"");
 
     return sanitizer;
 };
 
 sanitizer.removeFiles = () =>{
     const regex_url = /(?:https?\:\/\/|www\.)[^\s]+/g;
-    target = sanitizer.text.replace(regex_url,"");
+    target = sanitizer.target.replace(regex_url,"");
 
     return sanitizer;
 };
 
 sanitizer.removeAll = (text) =>{
-    target = text;
+    sanitizer.target = text;
     sanitizer.removeEmoji().removeMention().removeHashtag().removeLines().removeFiles();
     const sanitized = target;
-    target = "";
+    sanitizer.target = "";
     logger.debug(`(Sanitize Log): Target=${text} , Sanitized=${sanitized}`);
     return sanitized;
 };

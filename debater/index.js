@@ -2,6 +2,7 @@ const debater = require("./debater.js");
 const search = require("../search");
 const sanitizer = require("../common/sanitizer.js");
 const config = require("./config.json");
+const logger = require("../common/logger.js");
 
 const logic = {};
 
@@ -33,9 +34,9 @@ const determineStance = (result, mode) => {
     const strongScores = getStrongScores(result, mode);
     const BIAS = config.positiveBias;
     const strongest = strongScores.reduce((a, b) => {
-        const scoreA = a.score > 0 ? a.score - BIAS : a.score;
-        const scoreB = b.score > 0 ? b.score - BIAS : b.score;
-        return (scoreA > scoreB) ? scoreA : scoreB;
+        const scoreA = a.score > 0 ? a.score - BIAS : Math.abs(a.score);
+        const scoreB = b.score > 0 ? b.score - BIAS : Math.abs(b.score);
+        return (scoreA > scoreB) ? a : b;
     });
 
     return {
@@ -59,8 +60,9 @@ const getMessage = (determined) => {
     const FAIL_MSG = config.message.response.failed;
 
     if (stance === "Neutral") return FAIL_MSG;
-    const statement = lit.type === "book" ? lit.snippet : lit.description;
-    return `Found:${literature.link}
+    logger.info(`Found type:${lit.type} score:${lit.score} stm:${lit.snippet ?? lit.description}`);
+    const statement = (lit.type === "book") ? lit.snippet : lit.description;
+    return `Found:${lit.link}
     ${shorten(statement, 280, "Founnd:".length + 23 + 1)}`; // Found+link+line
 };
 
@@ -78,8 +80,8 @@ logic.response = async (input) => {
 
     // get news pros/cons score
     const proConScore = await Promise.all([
-        getProConScore(keywords, searchResult.book),
-        getProConScore(keywords, searchResult.news),
+        getProConScore(claim, searchResult.book),
+        getProConScore(claim, searchResult.news),
     ]);
     searchResult.book.forEach((v, index) => {
         v.score = proConScore[0][index];

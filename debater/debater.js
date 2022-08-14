@@ -18,6 +18,7 @@ debater.claimBoundaries = async (sentence) => {
         { headers: headers }
     ).catch(error => {
         logger.error(`Status:${error.response.status}:${error.message}`);
+        return sentence;
     });
 
     if (response.status !== 200) {
@@ -48,6 +49,7 @@ debater.termWikifier = async (text) => {
         { headers: headers }
     ).catch(error => {
         logger.error(`Status:${error.response.status}:${error.message}`);
+        return [];
     });
 
     if (response.status !== 200) {
@@ -81,6 +83,7 @@ debater.proCon = async (topic, sentences) => {
         { headers: headers }
     ).catch(error => {
         logger.error(`Status:${error.response.status}:${error.message}`);
+        return [];
     });
 
     if (response.status !== 200) {
