@@ -23,8 +23,11 @@ books.search = async (keywords) => {
     const result = bookResult.filter(v=>{
         const categories = v.volumeInfo.categories ?? [];
         return !(categories.some(e => NG_CAT.includes(e)));
+    }).filter(v =>{
+        const snippet = v.searchInfo ? v.searchInfo.textSnippet : "";
+        return snippet && snippet !== "";
     }).map(v => {
-        const snippetRaw = v.searchInfo ? v.searchInfo.textSnippet : "";
+        const snippetRaw = v.searchInfo.textSnippet;
         let snippet = decoder.decodeAll(snippetRaw);
         // remove html tag
         snippet = snippet.replace(/<\/?[^>]+(>|$)/g, "");
