@@ -97,8 +97,8 @@ logic.response = async (input) => {
     let mode = "ALL";
     const POS_ONLY = config.message.request.positive;
     const NEG_ONLY = config.message.request.negative;
-    if (sanitizedRequest === POS_ONLY) mode = "POS ONLY";
-    else if (sanitizedRequest === NEG_ONLY) mode = "NEG ONLY";
+    if (sanitizedRequest.includes(POS_ONLY)) mode = "POS ONLY";
+    else if (sanitizedRequest.includes(NEG_ONLY)) mode = "NEG ONLY";
 
     // determine stance from search result
     const determined = determineStance(searchResult, mode);
