@@ -18,8 +18,8 @@ const getStrongScores = (result, mode) => {
     const newsPro = result.news.reduce((a, b) => a.score > b.score ? a : b);
     const newsCon = result.news.reduce((a, b) => a.score < b.score ? a : b);
 
-    if(mode === "POS ONLY") return [bookPro, newsPro];
-    else if(mode === "NEG ONLY") return [bookCon, newsCon];
+    if (mode === "POS ONLY") return [bookPro, newsPro];
+    else if (mode === "NEG ONLY") return [bookCon, newsCon];
     else return [bookPro, bookCon, newsPro, newsCon];
 };
 
@@ -62,8 +62,8 @@ const getMessage = (determined) => {
     if (stance === "Neutral") return FAIL_MSG;
     logger.info(`Found type:${lit.type} score:${lit.score} stm:${lit.snippet ?? lit.description}`);
     const statement = (lit.type === "book") ? lit.snippet : lit.description;
-    return `Found:${lit.link}
-    ${shorten(statement, 280, "Founnd:".length + 23 + 1)}`; // Found+link+line
+    // space after mention+"Found"+link+line
+    return `Found:${lit.link}\n${shorten(statement, 280, 1 + "Founnd:".length + 23 + 1)}`;
 };
 
 logic.response = async (input) => {
@@ -93,8 +93,8 @@ logic.response = async (input) => {
     let mode = "ALL";
     const POS_ONLY = config.message.request.positive;
     const NEG_ONLY = config.message.request.negative;
-    if(request === POS_ONLY) mode = "POS ONLY";
-    else if(request === NEG_ONLY) mode = "NEG ONLY";
+    if (request === POS_ONLY) mode = "POS ONLY";
+    else if (request === NEG_ONLY) mode = "NEG ONLY";
 
     // determine stance from search result
     const determined = determineStance(searchResult, mode);

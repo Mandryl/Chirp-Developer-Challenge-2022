@@ -9,7 +9,7 @@ exports.reply_result = async (input, result_text) => {
     // Create reply text
     const res = this.preprocess_word(result_text);
     const params = {
-      status: `@${input.username} ${res}`.slice(0, 280),
+      status: `@${input.username} ${res}`,
       in_reply_to_status_id: input.id,
     };
 
