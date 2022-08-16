@@ -51,7 +51,7 @@ streaming.startStream = async (callback) => {
     "user.fields": ["name", "username"],
     expansions: ["referenced_tweets.id", "author_id"],
   }).catch((err) => {
-    logger.error(err);
+    logger.error(`Code: ${err.code}, Detail: ${err.data.detail}`);
     throw err;
   });
   logger.info("Standby mode...");
