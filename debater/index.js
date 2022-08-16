@@ -52,7 +52,7 @@ const shorten = (str, allLength, usedLength) => {
     return shortened + last;
 };
 
-const getMessage = (determined, mode) => {
+const getMessage = (determined, mode, mention) => {
     const stance = determined.stance;
     const lit = determined.lit;
 
@@ -65,8 +65,9 @@ const getMessage = (determined, mode) => {
 
     logger.info(`Found type:${lit.type} link:${lit.link}`);
     const statement = (lit.type === "book") ? lit.snippet : lit.description;
-    // space after mention+"Found"+link+line
-    return `Found:${lit.link}\n${shorten(statement, 280, 1 + "Founnd:".length + 23 + 1)}`;
+    // mention+"Found"+link+line
+    const shortened = shorten(statement, 280, `${mention}\nFound:`.length + 23 + 1);
+    return `${mention}\nFound:${lit.link}\n${shortened}`;
 };
 
 logic.response = async (input) => {
@@ -103,7 +104,8 @@ logic.response = async (input) => {
     // determine stance from search result
     const determined = determineStance(searchResult, mode);
     // form response message
-    const message = getMessage(determined, mode);
+    const mention = `@${input.username}`;
+    const message = getMessage(determined, mode, mention);
     return message;
 };
 
