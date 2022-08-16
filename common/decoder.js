@@ -9,7 +9,7 @@ decoder.decodeUnicode = (text) => {
         decoded = decodeURIComponent(JSON.parse(`"${text}"`));
     } catch (e) {
         decoded = text;
-        logger.error(`(Decode Error): text=${text}`);
+        logger.warn(`(Decode Error): text=${text}`);
     }
 
     return decoded;
