@@ -73,7 +73,11 @@ streaming.startStream = async (callback) => {
     // Action when mentioned
     logger.info(`Event: Tweet ${input.request_text} from @${input.username}`);
 
-    const response = await callback(input);
+    const response = await callback(input).catch(error=>{
+      logger.error(`Response Error:${error}`);
+      const FAIL_NOT_ENG = require("../debater/config.json").message.response.failed_not_english;
+      return `@${input.username} ${FAIL_NOT_ENG}`;
+    });
     return reply.reply_result(input, response);
   });
 };

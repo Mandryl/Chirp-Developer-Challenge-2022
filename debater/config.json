@@ -8,7 +8,8 @@
         },
         "response": {
             "failed": "Not Found: The topic may not have a general consensus or may be the latest under discussion.",
-            "failed_stance_specified": "If you don't specify a stance, this bot may find the opinion with a different stance."
+            "failed_stance_specified": "If you don't specify a stance, this bot may find the opinion with a different stance.",
+            "failed_not_english": "Sentence Processing Failed: This tweet is most likely not in English."
         }
     }
 }
