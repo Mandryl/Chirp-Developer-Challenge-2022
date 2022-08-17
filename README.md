@@ -77,13 +77,13 @@ export BOT_SCREEN_NAME =<your-bot-username>
 export BOT_ID = <your-bot-userid>
 ```
 
-## dotenv
+### dotenv
 
 In addition, Debatter_bot uses [dotenv](https://github.com/motdotla/dotenv) library.
 
 You can also set environment variables by adding a .env file directly under the project root folder.
 
-### Deployment
+## Deployment
 
 Debatter_bot is built with Node.js. When you deploy, you can use a free Node.js service such as [Glitch](https://glitch.com/) or set up your Node.js environment on a paid computing service.
 
