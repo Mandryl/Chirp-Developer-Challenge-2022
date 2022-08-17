@@ -23,8 +23,8 @@ Debatter_bot uses several external services. Please follow the steps below to ob
 IBM Debater API is an API for [Project Debater](https://research.ibm.com/interactive/project-debater/), which IBM is researching.
 API key will be issued if you applied for the [Early Access Program](https://early-access-program.debater.res.ibm.com/).
 
-> note
-> We have received permission from the person in charge to use the API for the Hacakathon.
+> **Note**  
+> We have received permission from the person in charge to use the API for the Hacakathon.  
 > If you use this source code in the production level, please check [the user agreement of IBM Project Debater](https://early-access-program.debater.res.ibm.com/) and obtain approval for use from the person in charge.
 
 If the API key is issued, set the environment variables as follows.
@@ -77,6 +77,12 @@ export BOT_SCREEN_NAME =<your-bot-username>
 export BOT_ID = <your-bot-userid>
 ```
 
+## dotenv
+
+In addition, Debatter_bot uses [dotenv](https://github.com/motdotla/dotenv) library.
+
+You can also set environment variables by adding a .env file directly under the project root folder.
+
 ### Deployment
 
 Debatter_bot is built with Node.js. When you deploy, you can use a free Node.js service such as [Glitch](https://glitch.com/) or set up your Node.js environment on a paid computing service.
@@ -86,12 +92,6 @@ To start the program, simply execute the following command. After execution, the
 ```shell
 npm start
 ```
-
-## dotenv
-
-In addition, Debatter_bot uses [dotenv](https://github.com/motdotla/dotenv) library.
-
-You can also set environment variables by adding a .env file directly under the project root folder.
 
 ## How to use
 
@@ -109,8 +109,8 @@ The search words are also defined in the configuration file when specifying a st
 
 Following that, the bot replies to the document based on the highest rating score.
 
-> note
-> This document will either affirm the Tweet content with the strongest claim or deny the Tweet content with the strongest claim among the retrieved literature.
+> **Note**  
+> This document will either affirm the Tweet content with the strongest claim or deny the Tweet content with the strongest claim among the retrieved literature.  
 > If only low-scoring documents were found, the bot will reply no relevant documents were found.
 
 ### Specifying a stance
