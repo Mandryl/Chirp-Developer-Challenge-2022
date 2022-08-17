@@ -44,7 +44,7 @@ export BING_API_KEY = <your-bing-api-key>
 ```
 
 There is a problem in the Azure Node.js library and the endpoint needs to be modified as [this link](https://github.com/Azure/azure-sdk-for-js/issues/18837#issuecomment-983188162) shows.
-If a endpoint that is not `https://api.bing.microsoft.com/v7.0/news/search` is specified, modify [this line](https://github.com/Mandryl/Chirp-Developer-Challenge-2022/blob/main/search/news.js#L15) in the source code　as follows.
+If a endpoint that is not `https://api.bing.microsoft.com/v7.0/news/search` is specified, modify [this line](https://github.com/Mandryl/Chirp-Developer-Challenge-2022/blob/main/search/news.js#L15) in the source code as follows.
 
 ```javascript:news.js
 client.endpoint = "your specified endpoint";
@@ -97,7 +97,7 @@ npm start
 
 Based on your response against an original tweet on Twitter, the bot searches for documents related to that content. 
 
-The search words are also defined in the configuration file when specifying a stance of pros and cons.
+The search words are also defined in [the configuration file](https://github.com/Mandryl/Chirp-Developer-Challenge-2022/blob/main/debater/config.json) when specifying a stance of pros and cons.
 
 ### Detail
 
@@ -107,7 +107,7 @@ The search words are also defined in the configuration file when specifying a st
 
 3. Documents hit by the search is evaluated by the IBM Debater API. The content of the evaluation is based on the original Tweet's claim, including the stance of pros and cons, the strength of the claim (undetermined: and the degree of relevance of the claim).
 
-Following that, the bot replies to the document based on the highest rating score.
+4. Following that, the bot replies to the document based on the highest rating score.
 
 > **Note**  
 > This document will either affirm the Tweet content with the strongest claim or deny the Tweet content with the strongest claim among the retrieved literature.  
