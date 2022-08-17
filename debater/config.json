@@ -3,8 +3,8 @@
     "positiveBias": 0.01,
     "message": {
         "request": {
-            "positive": "Find a positive opinion on this.",
-            "negative": "Find a negative opinion on this."
+            "positive": "positive",
+            "negative": "negative"
         },
         "response": {
             "failed": "Not Found: The topic may not have a general consensus or may be the latest under discussion.",
