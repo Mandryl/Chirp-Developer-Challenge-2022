@@ -58,7 +58,7 @@ client.endpoint = "your specified endpoint";
 Go to the [Development Platform](https://developer.twitter.com/en/docs/twitter-api) and click on Development Portal.
 
 > **Note**
-> Since Debattor_bot uses Twitter API v1.1 and v2, please make sure you choose Elevated access as shown [this link](https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api#v2-access-level).
+> Since Debattor_bot uses Twitter API v1.1 and v2, please make sure you choose Elevated access as shown in [this link](https://developer.twitter.com/en/docs/twitter-api/getting-started/about-twitter-api#v2-access-level).
 
 Then, click on keys and tokens on Development Portal and set the environment variables as follows.
 
