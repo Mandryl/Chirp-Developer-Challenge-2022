@@ -103,7 +103,7 @@ npm start
 
 Based on your response against an original tweet on Twitter, the bot searches for documents related to that content. 
 
-The search words are also defined in [the configuration file](https://github.com/Mandryl/Chirp-Developer-Challenge-2022/blob/main/debater/config.json) when specifying a stance of pros and cons.
+The search words are also defined in the [configuration file](https://github.com/Mandryl/Chirp-Developer-Challenge-2022/blob/main/debater/config.json) when specifying a stance of pros and cons.
 
 ### Detail
 
