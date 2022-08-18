@@ -44,7 +44,7 @@ export BING_API_KEY = <your-bing-api-key>
 ```
 
 There is a problem in the Azure Node.js library and the endpoint needs to be modified as [this link](https://github.com/Azure/azure-sdk-for-js/issues/18837#issuecomment-983188162) shows.
-If a endpoint that is not `https://api.bing.microsoft.com/v7.0/news/search` is specified, modify [this line](https://github.com/Mandryl/Chirp-Developer-Challenge-2022/blob/main/search/news.js#L15) in the source code as follows.
+If a endpoint that is **not** `https://api.bing.microsoft.com/v7.0/news/search` is specified, modify [this line](https://github.com/Mandryl/Chirp-Developer-Challenge-2022/blob/main/search/news.js#L15) in the source code as follows. (It is not an environment variable because the case seems to be rare.)
 
 ```javascript:news.js
 client.endpoint = "your specified endpoint";
