@@ -8,7 +8,7 @@ When you see a skeptical tweet, you can use the Debatter_bot to search for relev
 
 ## Demo
 
-Let's take a look at a following demo.
+Please take a look at the following demo.
 
 https://www.youtube.com/watch?v=(ID)
 
