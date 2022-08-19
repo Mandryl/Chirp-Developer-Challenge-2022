@@ -93,7 +93,7 @@ logic.response = async (input) => {
         getProConScore(sanitizedTarget, searchResult.book),
         getProConScore(sanitizedTarget, searchResult.news),
         getRelevantScore(sanitizedTarget, searchResult.book),
-        getRelevantScore(sanitizedTarget, searchResult.book),
+        getRelevantScore(sanitizedTarget, searchResult.news),
     ]);
     searchResult.book.forEach((v, index) => {
         v.score = scores[0][index] * scores[2][index];
