@@ -95,7 +95,7 @@ npm start
 
 Based on your response against an original tweet on Twitter, the bot searches for documents related to that content. 
 
-The search words are also defined in the [configuration file](https://github.com/Mandryl/Chirp-Developer-Challenge-2022/blob/main/debater/config.json) when specifying a stance of pros and cons.
+The search words are also defined in the [configuration file](https://github.com/Mandryl/Chirp-Developer-Challenge-2022/blob/main/debater/config.json) when specifying a stance of positive and negative.
 
 ### Detail
 
@@ -103,7 +103,7 @@ The search words are also defined in the [configuration file](https://github.com
 
 2. When receiving the request, the bot extracts keywords from the original post and searches for related books and news by using the Google Books and Bing News search engines.
 
-3. Documents hit by the search is evaluated by the IBM Debater API. The content of the evaluation is based on the original Tweet's claim, including the stance of pros and cons, the strength of the claim (undetermined: and the degree of relevance of the claim).
+3. Documents hit by the search is evaluated by the IBM Debater API. The content of the evaluation is based on the original Tweet's claim, including the stance of positve and negative, the strength of the claim (undetermined: and the degree of relevance of the claim).
 
 4. Following that, the bot replies to the document based on the highest rating score.
 
@@ -113,4 +113,4 @@ The search words are also defined in the [configuration file](https://github.com
 
 ### Specifying a stance
 
-You can customize search methods by specifying a stance of prons and cons. In other words, you can search only one of either positive or negative documents. (e.g., `@Bot Find a positive opinion on this.` or `Find a negative opinion on this.`)
+You can customize search methods by specifying a stance of positive and negative. In other words, you can search only one of either positive or negative documents. (e.g., `@Bot Find a positive opinion on this.` or `Find a negative opinion on this.`)
