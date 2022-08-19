@@ -103,7 +103,7 @@ The search words are also defined in the [configuration file](https://github.com
 
 2. When receiving the request, the bot extracts keywords from the original post and searches for related books and news by using the Google Books and Bing News search engines.
 
-3. Documents hit by the search is evaluated by the IBM Debater API. The content of the evaluation is based on the original Tweet's claim, including the stance of positve and negative, the strength of the claim (undetermined: and the degree of relevance of the claim).
+3. Documents hit by the search is evaluated by the IBM Debater API. The content of the evaluation is based on the original Tweet's claim, including the stance of positve and negative, the strength of the claim and the degree of relevance of the claim.
 
 4. Following that, the bot replies to the document based on the highest rating score.
 
