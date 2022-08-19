@@ -46,11 +46,11 @@ export BING_API_KEY = <your-bing-api-key>
 There seems to be a probkem with the Azure Node.js library, so the endpoint needs to be fixed as shown in [this link](https://github.com/Azure/azure-sdk-for-js/issues/18837#issuecomment-983188162) .
 
 There is a problem in the Azure Node.js library and the endpoint needs to be modified as [this link](https://github.com/Azure/azure-sdk-for-js/issues/18837#issuecomment-983188162) shows.
-If the endpoint that is **not** `https://api.bing.microsoft.com/v7.0/news/search` is specified, fix [this line](https://github.com/Mandryl/Chirp-Developer-Challenge-2022/blob/main/search/news.js#L15) in the source code as follows. (It does not seem to be an environment variable because this case rarely happens.
+If the endpoint that is **not** `https://api.bing.microsoft.com` is specified, fix [this line](https://github.com/Mandryl/Chirp-Developer-Challenge-2022/blob/main/search/news.js#L15) in the source code as follows. (It does not seem to be an environment variable because this case rarely happens.
 )
 
 ```javascript:news.js
-client.endpoint = "your specified endpoint";
+client.endpoint = `${your specified endpoint}/v7.0/news/search`;
 ```
 
 ### Twitter API
@@ -63,11 +63,11 @@ Go to the [Development Platform](https://developer.twitter.com/en/docs/twitter-a
 Then, click on keys and tokens on Development Portal and set the environment variables as follows.
 
 ```shell
-export CONSUMER_KEY=<your-consumer-key>
-export CONSUMER_SECRET=<your-consumer-secret>
-export ACCESS_TOKEN_KEY=<your-access-token-key>
-export ACCESS_TOKEN_SECRET=<your-access-token-secret>
-export BEARER_TOKEN=<your-bearer-token>
+export CONSUMER_KEY = <your-consumer-key>
+export CONSUMER_SECRET = <your-consumer-secret>
+export ACCESS_TOKEN_KEY = <your-access-token-key>
+export ACCESS_TOKEN_SECRET = <your-access-token-secret>
+export BEARER_TOKEN = <your-bearer-token>
 ```
 
 ### Twitter User Info
@@ -79,7 +79,7 @@ Then, go to the source code function on your browser and search your user ID by 
 Set the bot's username and user ID as follows.
 
 ```shell
-export BOT_SCREEN_NAME =<your-bot-username>
+export BOT_SCREEN_NAME = <your-bot-username>
 export BOT_ID = <your-bot-userid>
 ```
 
