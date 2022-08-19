@@ -6,14 +6,6 @@ Debatter_bot is the Twitter Bot that brings [verifiability](https://en.wikipedia
 
 When you see a skeptical tweet, you can use the Debatter_bot to search for relevant documents.
 
-## Demo
-
-Please take a look at the following demo.
-
-https://www.youtube.com/watch?v=(ID)
-
-[![youtube_thumbnail](https://img.youtube.com/vi/(ID)/0.jpg)](https://www.youtube.com/watch?v=(ID))
-
 ## Setup
 
 Debatter_bot consists of several external services. Get some necessary information and set the environment variables by following the steps below.
