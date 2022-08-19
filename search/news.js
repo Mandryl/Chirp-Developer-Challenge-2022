@@ -15,7 +15,7 @@ news.search = async (keywords) => {
     client.endpoint = "https://api.bing.microsoft.com/v7.0/news/search";
     const query = keywords.join(" ");
     const options = {
-        count: 30,
+        count: 100,
         market: "en-us"
     };
     const bingResult = await client.news.search(query, options).catch(error =>{

@@ -12,6 +12,12 @@ const getProConScore = async (keywords, result) => {
     return scores;
 };
 
+const getRelevantScore = async (keywords, result) => {
+    const texts = result.map(v => v.snippet ?? v.description);
+    const scores = await debater.claimDetection(keywords, texts);
+    return scores;
+};
+
 const getStrongScores = (result, mode) => {
     const bookPro = result.book.reduce((a, b) => a.score > b.score ? a : b);
     const bookCon = result.book.reduce((a, b) => a.score < b.score ? a : b);
@@ -26,14 +32,14 @@ const getStrongScores = (result, mode) => {
 const determineStance = (result, mode) => {
     const strongScores = getStrongScores(result, mode);
     const TH = config.threshold;
-    const hasStrong = strongScores.some(v => Math.abs(v.score) >= TH);
+    const hasStrong = strongScores.some(v => v.relevant >= TH);
 
     if (!hasStrong) return { stance: "Neutral", lit: null };
 
-    const BIAS = config.positiveBias;
+    const BIAS = config.negativeBias;
     const strongest = strongScores.reduce((a, b) => {
-        const scoreA = a.score > 0 ? a.score - BIAS : Math.abs(a.score);
-        const scoreB = b.score > 0 ? b.score - BIAS : Math.abs(b.score);
+        const scoreA = a.score > 0 ? a.score : Math.abs(a.score) * BIAS;
+        const scoreB = b.score > 0 ? b.score : Math.abs(b.score) * BIAS;
         return (scoreA > scoreB) ? a : b;
     });
 
@@ -74,7 +80,7 @@ logic.response = async (input) => {
     const target = input.target_text;
     const request = input.request_text;
 
-    // detect claim
+    // cut out claim
     const sanitizedTarget = sanitizer.removeAll(target);
     const claim = await debater.claimBoundaries(sanitizedTarget);
 
@@ -82,16 +88,20 @@ logic.response = async (input) => {
     const keywords = await debater.termWikifier(claim);
     const searchResult = await search.search(keywords);
 
-    // get news pros/cons score
-    const proConScore = await Promise.all([
-        getProConScore(claim, searchResult.book),
-        getProConScore(claim, searchResult.news),
+    // get pros/cons score and relevant score
+    const scores = await Promise.all([
+        getProConScore(sanitizedTarget, searchResult.book),
+        getProConScore(sanitizedTarget, searchResult.news),
+        getRelevantScore(sanitizedTarget, searchResult.book),
+        getRelevantScore(sanitizedTarget, searchResult.book),
     ]);
     searchResult.book.forEach((v, index) => {
-        v.score = proConScore[0][index];
+        v.score = scores[0][index] * scores[2][index];
+        v.relevant = scores[2][index];
     });
     searchResult.news.forEach((v, index) => {
-        v.score = proConScore[1][index];
+        v.score = scores[1][index] * scores[3][index];
+        v.relevant = scores[3][index];
     });
 
     const sanitizedRequest = sanitizer.removeAll(request);

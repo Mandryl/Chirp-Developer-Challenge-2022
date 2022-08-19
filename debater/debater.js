@@ -94,6 +94,31 @@ debater.proCon = async (topic, sentences) => {
     const scores = proconResult.map(v => (v.pro - v.con));
 
     return scores;
-}
+};
+
+debater.claimDetection = async (topic, sentences) => {
+    const pairs = sentences.map(v => [v, topic]);
+
+    const data = {
+        sentence_topic_pairs: pairs,
+    };
+
+    const response = await axios.post(
+        'https://claim-sentence.debater.res.ibm.com/score/',
+        data,
+        { headers: headers }
+    ).catch(error => {
+        logger.error(`Status:${error.response.status}:${error.message}`);
+        return []
+    });
+
+    if (response.status !== 200) {
+        return [];
+    }
+
+    const scores = response.data;
+
+    return scores;
+};
 
 module.exports = debater;
