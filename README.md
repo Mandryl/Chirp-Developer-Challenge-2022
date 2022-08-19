@@ -107,9 +107,9 @@ The search words are also defined in the [configuration file](https://github.com
 
 ### Detail
 
-1. If there is a post on Twitter that contains skeptical content, we accept requests to verify the content of a post by replying to the target post, including a mention to the Twitter Bot. (e.g., `@Bot Find references related to this post!`)
+1. If there is a post on Twitter that contains skeptical content, we accept requests to verify the content of a post by replying to the target post, including a mention to the bot. (e.g., `@Bot Find references related to this post!`)
 
-2. When receiving the request, the Twitter Bot extracts keywords from the original post and searches for related books and news by using the Google Books and Bing News search engines.
+2. When receiving the request, the bot extracts keywords from the original post and searches for related books and news by using the Google Books and Bing News search engines.
 
 3. Documents hit by the search is evaluated by the IBM Debater API. The content of the evaluation is based on the original Tweet's claim, including the stance of pros and cons, the strength of the claim (undetermined: and the degree of relevance of the claim).
 
